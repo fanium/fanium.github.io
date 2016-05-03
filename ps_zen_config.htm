@@ -184,8 +184,13 @@
 
         $("#b-submit").click(function() {
             console.log("Submit");
+            var return_to = getURLParameter('return_to');
+            if(return_to.length <= 0)
+            {
+            	return_to = "pebblejs://close#";
+            }
 
-            var location = "pebblejs://close#" + (JSON.stringify(saveOptions()));
+            var location = return_to + (JSON.stringify(saveOptions()));
             console.log("Warping to: " + location);
             console.log(location);
             document.location = location;
