@@ -190,7 +190,7 @@
             	return_to = "pebblejs://close#";
             }
 
-            var location = return_to + (JSON.stringify(saveOptions()));
+            var location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
             console.log("Warping to: " + location);
             console.log(location);
             document.location = location;
