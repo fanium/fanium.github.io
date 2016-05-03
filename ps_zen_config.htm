@@ -48,10 +48,7 @@
             </div>
         </div>
 
-        <div data-role="fieldcontain">
-		
-        </div>
-		
+
         <div data-role="fieldcontain">
             <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
                 <legend>Temperature Scale:</legend>
@@ -66,7 +63,7 @@
 		
 		
         <div data-role="fieldcontain" >
-            <label for="connectionName">Connection Name:</label>
+            <label for="text-connectionName">Connection Name:</label>
             <input type="text" name="text-connectionName"  id="text-connectionName" autocapitalize="off" autocorrect="off" autocomplete="off" value="iPhone">
         </div>
 
@@ -146,6 +143,12 @@
             $("#radioF").attr("checked", "checked");
         }
         $("input[name='weather-scale']").checkboxradio("refresh");
+        
+        var connectionName = getURLParameter('n');
+        if(connectionName !== 'null')
+        {
+        	$("#text-connectionName").val(connectionName);
+        }
 
         var apikey = getURLParameter('a');
         if (apikey !== 'null') {
