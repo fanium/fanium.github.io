@@ -182,14 +182,18 @@
             document.location = "pebblejs://close";
         });
 
-        $("#b-submit").click(function() {
+        $("#b-submit").click(function()
+        {
             console.log("Submit");
             var return_to = getURLParameter('return_to');
-            if(return_to.length <= 0)
+            if(return_to.length > 0)
+            {
+                return_to = decodeURIComponent(return_to);
+            }
+            else
             {
             	return_to = "pebblejs://close#";
             }
-            return_to = decodeURIComponent(return_to);
 
             var location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
             console.log("Warping to: " + location);
