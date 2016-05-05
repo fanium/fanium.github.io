@@ -115,8 +115,6 @@
         }
         $("input[name='weather-service']").checkboxradio("refresh");
         
-        var apikey = getURLParameter('a');
-
         var weatherService = $("input[name='weather-service']");
         weatherService.change(function()
         {
@@ -151,6 +149,13 @@
         {
         	$("#text-connectionName").val(connectionName);
         }
+
+        var apikey = getURLParameter('a');
+        if (apikey !== 'null')
+		{
+            $("#text-apikey").val(apikey);
+        } 
+
 
         var flipBattery = $("select[name=flipbattery]");
         var battery = getURLParameter('b');
