@@ -105,29 +105,34 @@
         var initialLoad = true;
 
         var service = getURLParameter('s');
-        if (service === 'open') {
+        if (service === 'open')
+		{
             $("#radioopen").attr("checked", "checked");
-        } else {
+        }
+		else
+		{
             $("#radiowunder").attr("checked", "checked");
         }
         $("input[name='weather-service']").checkboxradio("refresh");
         
+        var apikey = getURLParameter('a');
+
         var weatherService = $("input[name='weather-service']");
         weatherService.change(function()
         {
-		var isCheckWUnder = $("#radiowunder").is(':checked');
-             if (isCheckWUnder)
-		{
+			var isCheckWUnder = $("#radiowunder").is(':checked');
+            if (isCheckWUnder)
+			{
                 $("#apikey").show();
-                if (!initialLoad)
-		{
+				if (!initialLoad)
+				{
                     $("#popupCloseRight").popup("open");
                 }
             }
             else
-		{
-                	$("#apikey").hide();
-            	}
+			{
+               	$("#apikey").hide();
+            }
         });
 
         var scale = getURLParameter('u');
@@ -146,9 +151,6 @@
         {
         	$("#text-connectionName").val(connectionName);
         }
-
-        var apikey = getURLParameter('a');
-
 
         var flipBattery = $("select[name=flipbattery]");
         var battery = getURLParameter('b');
