@@ -104,24 +104,6 @@
 
         var initialLoad = true;
 
-		var weatherService = $("input[name='weather-service']");
-        weatherService.change(function()
-        {
-			var isCheckWUnder = $("#radiowunder").is(':checked');
-             if (isCheckWUnder)
-			{
-                $("#apikey").show();
-                if (!initialLoad)
-				{
-                    $("#popupCloseRight").popup("open");
-                }
-            }
-			else
-			{
-                $("#apikey").hide();
-            }
-        });
-
         var service = getURLParameter('s');
         if (service === 'open') {
             $("#radioopen").attr("checked", "checked");
@@ -129,6 +111,24 @@
             $("#radiowunder").attr("checked", "checked");
         }
         $("input[name='weather-service']").checkboxradio("refresh");
+        
+        var weatherService = $("input[name='weather-service']");
+        weatherService.change(function()
+        {
+		var isCheckWUnder = $("#radiowunder").is(':checked');
+             if (isCheckWUnder)
+		{
+                $("#apikey").show();
+                if (!initialLoad)
+		{
+                    $("#popupCloseRight").popup("open");
+                }
+            }
+            else
+		{
+                	$("#apikey").hide();
+            	}
+        });
 
         var scale = getURLParameter('u');
         if (scale === 'C')
