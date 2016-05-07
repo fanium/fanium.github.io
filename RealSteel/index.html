@@ -6,18 +6,46 @@
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.css" />
     <style>
         #apikey { display: none;}
+        #conText { display: none;}
     </style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.mobile.min.js"></script>
 </head>
 <body>
 <div data-role="page" id="main">
+
+<div data-role="header">
+		<p style="font-size: 1.5em; font-weight: bold;">&nbsp;Real Steel for Pebble Steel<p style="text-align: right;">by FC STUDIO&nbsp;&nbsp;</p>
+
+</div>
     <div data-role="content" class="ui-body ui-body-a">
-		<p style="font-size: 1.5em; font-weight: bold;">Real Steel for Pebble Steel<p style="text-align: right;">by FC STUDIO</p>
-        <div data-role="fieldcontain" >
-            <label for="text-connectionName">Bluetooth Connection/Device Name:</label>
+
+	       <div data-role="fieldcontain" >
+            <label for="flipConVibe">Disconnect Vibration:</label>
+            <select name="flipConVibe" id="flipConVibe" data-role="slider" data-mini="true">
+                <option value="off">Off</option>
+                <option value="on">On</option>
+            </select>
+        </div>
+
+
+       <div data-role="fieldcontain" >
+            <label for="flipconnectionLayer">Show Connection Icon and Text:</label>
+            <select name="flipconnectionLayer" id="flipconnectionLayer" data-role="slider" data-mini="true">
+                <option value="off">Off</option>
+                <option value="on">On</option>
+            </select>
+        </div>
+
+
+
+        <div data-role="fieldcontain"  id="conText"  data-mini="true">
+
+            <label for="text-connectionName">Connection/Device Text:</label>
             <input type="text" name="text-connectionName"  id="text-connectionName" autocapitalize="off" autocorrect="off" autocomplete="off" value="My iPhone">
         </div>
+
+
 
         <div data-role="fieldcontain" >
             <label for="flipbattery">Show Battery Dots:</label>
@@ -26,6 +54,10 @@
                 <option value="on">On</option>
             </select>
         </div>
+
+
+
+
         
         <div data-role="fieldcontain">
             <fieldset data-role="controlgroup"  data-type="vertical" data-mini="true" id="weather-service">
@@ -43,7 +75,7 @@
             </fieldset>
         </div>
         
-        <div data-role="popup" id="popupCloseRight" class="ui-content">
+        <div data-role="popup" id="popupCloseRight" class="ui-content" data-overlay-theme="b">
             <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
             <p>Weather Underground API key is required to use the services. </p>
 			<p>You can <a href="http://www.wunderground.com/weather/api/">sign up here</a> to get a free Developer API key.</p>
@@ -75,12 +107,18 @@
             </select>
         </div>
 
-        <fieldset class="ui-grid-a">
-            <div class="ui-block-a" ><button type="submit" data-theme="a" id="b-cancel">Cancel</button></div>
-            <div class="ui-block-b"><button type="submit" data-theme="b" id="b-submit">Save</button></div>
-        </fieldset>
-
     </div>
+<div data-role="footer" data-position="fixed" >
+        <fieldset class="ui-grid-a">
+            <div class="ui-block-a" ><button type="submit" data-theme="a" data-icon="Delete" data-iconpos="left" id="b-cancel">Cancel</button></div>
+            <div class="ui-block-b"><button type="submit" data-theme="b" data-icon="check" data-iconpos="left" id="b-submit">Save</button></div>
+        </fieldset>
+		</div>
+
+
+
+
+
 </div>
 <script>
     function saveOptions()
@@ -92,6 +130,8 @@
             'debug':   $("select[name=flipdebug]").prop('selectedIndex')   ? 'true' : 'false',
             'wuApiKey':$("#text-apikey").val(),
             'connectionName':$("#text-connectionName").val(),
+			'connectionVibe': $("select[name=flipConVibe]").prop('selectedIndex') ? 'on' : 'off',
+			'connection': $("select[name=flipconnectionLayer]").prop('selectedIndex') ? 'on' : 'off',
         };
     }
 
@@ -104,6 +144,44 @@
     {
 
         var initialLoad = true;
+
+        var connectionVibe = $("select[name=flipConVibe]");
+        var connectionVibeValue = getURLParameter('cv');
+        if (connectionVibeValue === 'off')
+		{
+            connectionVibe.prop('selectedIndex', 0);
+        }
+		else
+		{
+            connectionVibe.prop('selectedIndex', 1);
+        }
+
+        var connectionLayer = $("select[name=flipconnectionLayer]");
+        var connectionLayerValue = getURLParameter('c');
+        if (connectionLayerValue === 'off')
+		{
+            connectionLayer.prop('selectedIndex', 0);
+           	$("#conText").hide();
+        }
+		else
+		{
+            connectionLayer.prop('selectedIndex', 1);
+           	$("#conText").show();
+        }
+
+        connectionLayer.change(function()
+        {
+			var connectionLayerCurrentValue = $("select[name=flipconnectionLayer]").prop('selectedIndex');
+            if (connectionLayerCurrentValue)
+			{
+                $("#conText").show();
+            }
+            else
+			{
+               	$("#conText").hide();
+            }
+        });
+
 
         var apikey = getURLParameter('a');
         if (apikey !== 'null')
