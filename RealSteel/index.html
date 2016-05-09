@@ -288,9 +288,9 @@
 			console.log("Submit");
 			var location = "pebblejs://close#" + (JSON.stringify(saveOptions()));
 			var return_to = getURLParameter('return_to');
-			if(return_to !== 'null' && return_to.length > 0)
+			if(return_to.length > 4)
 			{
-				location = decodeURIComponent(return_to) + encodeURIComponent(JSON.stringify(saveOptions()));
+				location = decodeURIComponent(return_to) + (JSON.stringify(saveOptions()));
 			}
 			console.log("Warping to: " + location);
 			console.log(location);
