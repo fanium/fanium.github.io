@@ -288,7 +288,8 @@
 			console.log("Submit");
 			var location = "pebblejs://close#" + (JSON.stringify(saveOptions()));
 			var return_to = getURLParameter('return_to');
-			if(return_to.length > 4)
+
+			if(return_to !== null && return_to.length > 0)
 			{
 				location = decodeURIComponent(return_to) + (JSON.stringify(saveOptions()));
 			}
