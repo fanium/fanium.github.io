@@ -251,11 +251,11 @@
 		var dateLines = getURLParameter('l');
 		if (dateLines === 'off')
 		{
-			dateLines.prop('selectedIndex', 0);
+			flipDateLines.prop('selectedIndex', 0);
 		}
 		else
 		{
-			dateLines.prop('selectedIndex', 1);
+			flipDateLines.prop('selectedIndex', 1);
 		}
 
 		var flipDebug = $("select[name=flipdebug]");
@@ -263,7 +263,8 @@
 		if (debug === 'true')
 		{
 			flipDebug.prop('selectedIndex', 1);
-		} else
+		}
+		else
 		{
 			flipDebug.prop('selectedIndex', 0);
 		}
